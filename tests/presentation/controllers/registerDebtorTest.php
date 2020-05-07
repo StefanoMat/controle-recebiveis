@@ -77,4 +77,28 @@ class registerDebtorTest extends TestCase{
     $this->assertEquals($response, new MissingParamError("Missing address"));
   }
 
+  public function testReturnsOkIfAllFieldsProvided()
+  {
+    $sut = new RegisterDebtor();
+
+    $httpRequest = [
+      'body' => [
+        'name' => 'valid_name',
+        'cpfCnpj' => 'valid_cnpj',
+        'birthdate' => 'valid_date',
+        'address' => 'valid_address'
+      ]
+    ];
+
+    $response = $sut->handle($httpRequest);
+
+    $this->assertEquals($response['statusCode'], 200);
+    $this->assertEquals($response['body'], [
+      'id' => 'valid_id',
+      'name' => 'valid_name',
+      'cpfCnpj' => 'valid_cnpj',
+      'birthdate' => 'valid_date',
+      'address' => 'valid_address'
+    ]);
+  }
 }
