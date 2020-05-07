@@ -10,5 +10,13 @@
     "require": {},
     "require-dev": {
         "phpunit/phpunit": "^9.1"
-    }
+    },
+
+    "autoload": {
+      "psr-4": {
+          "Domain\\": "src/domain",
+          "Main\\": "src/main",
+          "Presentation\\": "src/presentation"
+      }
+  }
 }
