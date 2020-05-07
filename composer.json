@@ -1,0 +1,14 @@
+{
+    "name": "stefano/controle-recebiveis",
+    "description": "Projeto de cadastro de d\u0000vidas da Receiv",
+    "authors": [
+        {
+            "name": "stefanoMat",
+            "email": "stefanokaefer@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^9.1"
+    }
+}
