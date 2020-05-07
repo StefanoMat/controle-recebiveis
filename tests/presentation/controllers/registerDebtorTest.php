@@ -59,4 +59,22 @@ class registerDebtorTest extends TestCase{
     $this->assertEquals($response, new MissingParamError("Missing birthdate"));
   }
 
+  public function testReturnsErrorIfNoAddressProvided()
+  {
+
+    $sut = new RegisterDebtor();
+
+    $httpRequest = [
+      'body' => [
+        'name' => 'valid_name',
+        'cpfCnpj' => 'valid_cnpj',
+        'birthdate' => 'valid_date',
+      ]
+    ];
+
+    $response = $sut->handle($httpRequest);
+
+    $this->assertEquals($response, new MissingParamError("Missing address"));
+  }
+
 }
