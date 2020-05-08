@@ -16,7 +16,9 @@
       "psr-4": {
           "Domain\\": "src/domain",
           "Main\\": "src/main",
-          "Presentation\\": "src/presentation"
+          "Presentation\\": "src/presentation",
+          "Db\\": "src/db",
+          "Data\\": "src/data"
       }
   }
 }
