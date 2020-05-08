@@ -11,6 +11,14 @@ class Debtor{
   private $birthdate;
   private $address;
 
+  public function __construct(string $name, int $cpfCnpj, string $birthdate, string $address)
+  {
+    $this->name = $name;
+    $this->cpfCnpj = $cpfCnpj;
+    $this->birthdate = $birthdate;
+    $this->address = $address;
+  }
+
   public function getId(): int
   {
     return $this->id;
