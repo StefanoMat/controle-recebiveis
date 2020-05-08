@@ -10,6 +10,8 @@ class Debtor{
   private $cpfCnpj;
   private $birthdate;
   private $address;
+  private $createdAt;
+  private $updatedAt;
 
   public function __construct(string $name, int $cpfCnpj, string $birthdate, string $address)
   {
@@ -42,6 +44,16 @@ class Debtor{
   public function getAddress(): string
   {
     return $this->address;
+  }
+
+  public function getCreated()
+  {
+    return $this->createdAt;
+  }
+
+  public function getUpdated()
+  {
+    return $this->updatedAt;
   }
 
   public function setId(int $id)
