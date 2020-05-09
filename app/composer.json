@@ -21,8 +21,6 @@
           "Main\\": "src/main",
           "Presentation\\": "src/presentation",
           "Db\\": "src/db",
-          "Data\\": "src/data",
-          "Mvc\\": "mvc"
-      }
+          "Data\\": "src/data"      }
   }
 }
