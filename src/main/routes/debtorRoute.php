@@ -5,7 +5,7 @@ use Main\Factory\Controllers\RegisterDebtorFactory;
 use Main\Adapter\RouteAdapter;
 
 $dispatcher = \FastRoute\simpleDispatcher(function(\FastRoute\RouteCollector $r) {
-  $r->addRoute('GET', '/debtor', 'handler');
+  $r->addRoute('POST', '/debtor', 'handler');
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];

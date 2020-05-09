@@ -9,7 +9,12 @@ class RouteAdapter {
 
   public function __construct(Controller $controller)
   {
-    $controller->handle($_POST);
+    $httpRequest = [
+      'body' => $_POST
+    ];
+    $response = $controller->handle($httpRequest);
+    print_r($response->getStatusCode(). '<br>');
+    print_r($response->getBody()->getMessage());
   }
 
 }
