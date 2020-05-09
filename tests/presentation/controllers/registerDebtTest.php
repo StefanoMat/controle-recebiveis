@@ -1,14 +1,28 @@
 <?php
 
+use Domain\Models\Debt;
+use Domain\Usecase\AddDebt;
 use PHPUnit\Framework\TestCase;
-use Presentation\Errors\MissingParamError;
 use Presentation\Controllers\RegisterDebt;
+use Presentation\Errors\MissingParamError;
+
+class RegisterDebtStub implements AddDebt {
+  public function add(Debt $dept) {
+    $register = [
+      'id' => 'valid_id',
+      'debtTitle' => 'valid_title',
+      'value' => 5,
+      'endDate' => 'valid_date',
+    ];
+    return $register;
+  }
+}
 
 class RegisterDebtTest extends TestCase{
 
   public function testReturnsErrorIfNoDebtTitleProvided()
   {
-    $sut = new RegisterDebt();
+    $sut = new RegisterDebt(new RegisterDebtStub());
     $httpRequest = [
       'body' => [
         'value' => 'valid_value',
@@ -22,7 +36,7 @@ class RegisterDebtTest extends TestCase{
 
   public function testReturnsErrorIfNoValueProvided()
   {
-    $sut = new RegisterDebt();
+    $sut = new RegisterDebt(new RegisterDebtStub());
     $httpRequest = [
       'body' => [
         'debtTitle' => 'valid_title',
@@ -36,7 +50,7 @@ class RegisterDebtTest extends TestCase{
 
   public function testReturnsErrorIfNoEndDateProvided()
   {
-    $sut = new RegisterDebt();
+    $sut = new RegisterDebt(new RegisterDebtStub());
     $httpRequest = [
       'body' => [
         'value' => 'valid_value',
@@ -46,5 +60,25 @@ class RegisterDebtTest extends TestCase{
 
       $response = $sut->handle($httpRequest);
       $this->assertEquals($response->getBody(), new MissingParamError("endDate"));
+  }
+
+  public function testReturnsOkAndRegisterIfAllFieldsProvided()
+  {
+    $sut = new RegisterDebt(new RegisterDebtStub());
+    $httpRequest = [
+      'body' => [
+        'debtTitle' => 'valid_title',
+        'value' => 5.55,
+        'endDate' => '10/10/2020',
+      ]
+    ];
+
+    $response = $sut->handle($httpRequest);
+    $this->assertEquals($response->getBody(), [
+      'id' => 'valid_id',
+      'debtTitle' => 'valid_title',
+      'value' => 5,
+      'endDate' => 'valid_date',
+    ]);
   }
 }
