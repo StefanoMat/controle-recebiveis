@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use Presentation\Errors\MissingParamError;
+use Presentation\Controllers\RegisterDebt;
 
 class RegisterDebtTest extends TestCase{
 
@@ -10,9 +11,8 @@ class RegisterDebtTest extends TestCase{
     $sut = new RegisterDebt();
     $httpRequest = [
       'body' => [
-        'value' => 'valid_cnpj',
+        'value' => 'valid_value',
         'endDate' => 'valid_date',
-        'address' => 'valid_address'
         ] 
       ];
 
