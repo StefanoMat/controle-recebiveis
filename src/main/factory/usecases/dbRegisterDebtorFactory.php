@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Main\Factory\UseCases;
 
-use Domain\Usecase\AddDebtor;
 use Db\Mysql\DebtorMySqlRepository;
+use Domain\Usecase\AddDebtor;
 
 class DbRegisterDebtorFactory{
 
@@ -15,7 +15,7 @@ class DbRegisterDebtorFactory{
 
   }
 
-  public function getDebtorMysqlRepository()
+  public function getDebtorMysqlRepository(): AddDebtor
   {
     return $this->debtorMySqlRepository;
 
