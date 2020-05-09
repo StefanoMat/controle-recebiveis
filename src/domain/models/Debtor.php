@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Domain\Models;
 
+use DateTime;
+
 class Debtor{
   private $id;
   private $name;
@@ -13,7 +15,7 @@ class Debtor{
   private $createdAt;
   private $updatedAt;
 
-  public function __construct(string $name, int $cpfCnpj, string $birthdate, string $address)
+  public function __construct(string $name, int $cpfCnpj, DateTime $birthdate, string $address)
   {
     $this->name = $name;
     $this->cpfCnpj = $cpfCnpj;
@@ -36,7 +38,7 @@ class Debtor{
     return $this->cpfCnpj;
   }
 
-  public function getBirthdate()
+  public function getBirthdate(): DateTime
   {
     return $this->birthdate;
   }
@@ -71,7 +73,7 @@ class Debtor{
     $this->cpfCnpj = $cpfCnpj;
   }
 
-  public function setBirthDate($birthDate)
+  public function setBirthDate(DateTime $birthDate)
   {
     $this->birthDate = $birthDate;
   }

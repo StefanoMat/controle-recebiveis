@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace Presentation\Controllers;
 
+use DateTime;
 use Domain\Models\Debtor;
 use Domain\UseCase\AddDebtor;
-use Presentation\Errors\MissingParamError;
 use Presentation\Errors\ServerError;
 use Presentation\Helpers\HttpResponse;
 use Presentation\Protocols\Controller;
+use Presentation\Errors\MissingParamError;
 
 class RegisterDebtor implements Controller{
   private $addDebtorIm;
@@ -33,14 +34,23 @@ class RegisterDebtor implements Controller{
       }
 
       $debtorFields = $htppRequest['body'];
-      $register = $this->addDebtorIm->add(new Debtor($debtorFields['name'], $debtorFields['cpfCnpj'], $debtorFields['birthdate'], $debtorFields['address']));
+      $debtor = $this->__mapDebtor($debtorFields);
+      $register = $this->addDebtorIm->add($debtor);
       $response->withStatus(200);
       $response->withBody($register);
       return $response;
     } catch(\Exception $e) {
       $response->withStatus(500);
-      $response->withBody(new ServerError);
+      $response->withBody($e);
       return $response;
     }
+  }
+
+  private function __mapDebtor(array $debtorFields): Debtor
+  {
+    $birthdateInDate = new DateTime($debtorFields['birthdate']);
+    // $birthdateInDate = $birthdateInDate->format('YYYY-MM-DD');
+    $debtor = new Debtor($debtorFields['name'], (int) $debtorFields['cpfCnpj'], $birthdateInDate, $debtorFields['address']);
+    return $debtor;
   }
 }
