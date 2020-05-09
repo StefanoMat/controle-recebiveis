@@ -11,7 +11,7 @@ class DbRegisterDebtFactory{
   private $debtMySqlRepository;
   public function __construct()
   {
-    $this->debtorMySqlRepository = new DebtMySqlRepository();
+    $this->debtMySqlRepository = new DebtMySqlRepository();
 
   }
 
