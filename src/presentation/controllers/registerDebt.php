@@ -23,7 +23,7 @@ class RegisterDebt implements Controller {
   {
     try{
       $response = new HttpResponse();
-      $requiredFields = ['debtTitle','value','endDate'];
+      $requiredFields = ['debtorId','debtTitle','value','endDate'];
 
       foreach ($requiredFields as $field) {
         if(!isset($httpRequest['body'][$field])) {
@@ -49,7 +49,7 @@ class RegisterDebt implements Controller {
   private function __mapDebt(array $debtFields) : Debt
   {
     $endDateInDate = new DateTime($debtFields['endDate']);
-    $debt = new Debt($debtFields['debtTitle'], (float) $debtFields['value'], $endDateInDate);
+    $debt = new Debt($debtFields['debtorId'],$debtFields['debtTitle'], (float) $debtFields['value'], $endDateInDate);
     return $debt;
   }
 
