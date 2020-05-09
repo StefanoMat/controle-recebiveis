@@ -19,11 +19,10 @@ class DebtMySqlRepository implements AddDebt{
 
   public function add(Debt $debt)
   {
-    $queryToExecute = $this->db->prepare('insert into debt (debtor_id, debt_description, value, end_date) values (:debtor_id, :debt_description, :value, :end_date)');
+    $queryToExecute = $this->db->prepare('insert into debt (debt_title, value, end_date,) values (:debt_title, :value, :end_date)');
     $debtorData = $this->__debtData($debt);
 
-    $queryToExecute->bindParam(':debtor_id',$debtorData['debtorId']);
-    $queryToExecute->bindParam(':debt_description',$debtorData['debtDescription']);
+    $queryToExecute->bindParam(':debt_title',$debtorData['debTitle']);
     $queryToExecute->bindParam(':value', $debtorData['value']);
     $queryToExecute->bindParam(':end_date', $debtorData['endDate']);
     $queryToExecute->execute();
@@ -32,8 +31,7 @@ class DebtMySqlRepository implements AddDebt{
 
   private function __debtData(Debt $debt) {
     return [
-      'debtorId' => $debt->getDebtorId(),
-      'debtDescription' => $debt->getDebtDescription(),
+      'debtTitle' => $debt->getDebtTitle(),
       'value' => $debt->getValue(),
       'endDate' => $debt->getEndDate()->format('Y-m-d'),
     ];
