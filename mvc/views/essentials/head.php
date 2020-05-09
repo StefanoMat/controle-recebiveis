@@ -1,5 +1,5 @@
 <?php
-namespace App\Views\Head;
+namespace Mvc\Views\Essential\Head;
 ?>
   
 <!doctype html>

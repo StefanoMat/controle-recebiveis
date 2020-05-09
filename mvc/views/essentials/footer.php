@@ -1,5 +1,5 @@
 <?php
-namespace App\Views\Footer;
+namespace Mvc\Views\Essential;
 ?>
 
 </body>
