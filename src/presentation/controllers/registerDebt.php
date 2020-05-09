@@ -23,7 +23,7 @@ class RegisterDebt implements Controller {
   {
     try{
       $response = new HttpResponse();
-      $requiredFields = ['debtorId','debtTitle','value','endDate'];
+      $requiredFields = ['debtorId','debtDescription','value','endDate'];
 
       foreach ($requiredFields as $field) {
         if(!isset($httpRequest['body'][$field])) {
@@ -41,7 +41,7 @@ class RegisterDebt implements Controller {
       return $response;
     } catch(\Exception $e) {
       $response->withStatus(500);
-      $response->withBody(new ServerError);
+      $response->withBody($e);
       return $response;
     }
   }
@@ -49,7 +49,7 @@ class RegisterDebt implements Controller {
   private function __mapDebt(array $debtFields) : Debt
   {
     $endDateInDate = new DateTime($debtFields['endDate']);
-    $debt = new Debt($debtFields['debtorId'],$debtFields['debtTitle'], (float) $debtFields['value'], $endDateInDate);
+    $debt = new Debt((int) $debtFields['debtorId'],$debtFields['debtDescription'], (float) $debtFields['value'], $endDateInDate);
     return $debt;
   }
 

@@ -9,16 +9,16 @@ use DateTime;
 class Debt{
   private $id;
   private $debtorId;
-  private $debtTitle;
+  private $debtDescription;
   private $value;
   private $endDate;
   private $createdAt;
   private $updatedAt;
 
-  public function __construct(int $debtorId, string $debtTitle, float $value, DateTime $endDate)
+  public function __construct(int $debtorId, string $debtDescription, float $value, DateTime $endDate)
   {
     $this->debtorId = $debtorId;
-    $this->debtTitle = $debtTitle;
+    $this->debtDescription = $debtDescription;
     $this->value = $value;
     $this->endDate = $endDate;
   }
@@ -28,14 +28,14 @@ class Debt{
     return $this->id;
   }
 
-  public function getDebtorId()
+  public function getDebtorId(): int
   {
     return $this->debtorId;
   }
 
-  public function getDebtTitle(): string
+  public function getDebtDescription(): string
   {
-    return $this->debtTitle;
+    return $this->debtDescription;
   }
 
   public function getValue(): float
