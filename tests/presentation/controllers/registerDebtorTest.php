@@ -83,7 +83,7 @@ class registerDebtorTest extends TestCase{
       'body' => [
         'name' => 'valid_name',
         'cpfCnpj' => 0,
-        'birthdate' => 'valid_birthdate',
+        'birthdate' => '10/10/2010',
         'address' => 'valid_address'
       ]
     ];

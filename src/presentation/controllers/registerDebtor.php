@@ -41,7 +41,7 @@ class RegisterDebtor implements Controller{
       return $response;
     } catch(\Exception $e) {
       $response->withStatus(500);
-      $response->withBody($e);
+      $response->withBody(new ServerError);
       return $response;
     }
   }
@@ -49,7 +49,6 @@ class RegisterDebtor implements Controller{
   private function __mapDebtor(array $debtorFields): Debtor
   {
     $birthdateInDate = new DateTime($debtorFields['birthdate']);
-    // $birthdateInDate = $birthdateInDate->format('YYYY-MM-DD');
     $debtor = new Debtor($debtorFields['name'], (int) $debtorFields['cpfCnpj'], $birthdateInDate, $debtorFields['address']);
     return $debtor;
   }
