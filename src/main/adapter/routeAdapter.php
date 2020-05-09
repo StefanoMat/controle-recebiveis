@@ -13,8 +13,13 @@ class RouteAdapter {
       'body' => $_POST
     ];
     $response = $controller->handle($httpRequest);
-    print_r($response->getStatusCode(). '<br>');
-    print_r($response->getBody()->getMessage());
+    if ($response->getStatusCode() >= 200 && $response->getStatusCode() <=299) {
+      http_response_code($response->getStatusCode());
+      print json_encode($response->getBody());
+    } else {
+      http_response_code($response->getStatusCode());
+      print json_encode($response->getBody()->getMessage());
+    }
   }
 
 }
