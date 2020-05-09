@@ -31,7 +31,7 @@ class registerDebtorTest extends TestCase{
       ]
     ];
     $response = $sut->handle($httpRequest);
-    $this->assertEquals($response, new MissingParamError("Missing name"));
+    $this->assertEquals($response->getBody(), new MissingParamError("name"));
   }
 
   public function testReturnsErrorIfNoCpfCnpjProvided()
@@ -45,7 +45,7 @@ class registerDebtorTest extends TestCase{
       ]
     ];
     $response = $sut->handle($httpRequest);
-    $this->assertEquals($response, new MissingParamError("Missing cpfCnpj"));
+    $this->assertEquals($response->getBody(), new MissingParamError("cpfCnpj"));
   }
 
   public function testReturnsErrorIfNoBirthdateProvided()
@@ -59,7 +59,7 @@ class registerDebtorTest extends TestCase{
       ]
     ];
     $response = $sut->handle($httpRequest);
-    $this->assertEquals($response, new MissingParamError("Missing birthdate"));
+    $this->assertEquals($response->getBody(), new MissingParamError("birthdate"));
   }
 
   public function testReturnsErrorIfNoAddressProvided()
@@ -73,7 +73,7 @@ class registerDebtorTest extends TestCase{
       ]
     ];
     $response = $sut->handle($httpRequest);
-    $this->assertEquals($response, new MissingParamError("Missing address"));
+    $this->assertEquals($response->getBody(), new MissingParamError("address"));
   }
 
   public function testReturnsOkAndRegisterIfAllFieldsProvided()
@@ -89,8 +89,8 @@ class registerDebtorTest extends TestCase{
     ];
 
     $response = $sut->handle($httpRequest);
-    $this->assertEquals($response['statusCode'], 200);
-    $this->assertEquals($response['body'], [
+    $this->assertEquals($response->getStatusCode(), 200);
+    $this->assertEquals($response->getBody(), [
       'id' => 'valid_id',
       'name' => 'valid_name',
       'cpfCnpj' => 0,
