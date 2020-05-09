@@ -1,5 +1,8 @@
 <?php
 
 require './vendor/autoload.php';
- 
-require 'src/main/routes/debtorRoute.php';
+define('ROOT', dirname(__FILE__));
+
+use Main\Routes\Route;
+$routes = new Route();
+$routes->startRoute();
