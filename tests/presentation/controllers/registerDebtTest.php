@@ -11,7 +11,7 @@ class RegisterDebtStub implements AddDebt {
     $register = [
       'id' => 'valid_id',
       'debtorId' => 'valid_id',
-      'debtTitle' => 'valid_title',
+      'debtDescription' => 'valid_description',
       'value' => 5,
       'endDate' => 'valid_date',
     ];
@@ -21,7 +21,7 @@ class RegisterDebtStub implements AddDebt {
 
 class RegisterDebtTest extends TestCase{
 
-  public function testReturnsErrorIfNoDebtTitleProvided()
+  public function testReturnsErrorIfNodebtDescriptionProvided()
   {
     $sut = new RegisterDebt(new RegisterDebtStub());
     $httpRequest = [
@@ -33,7 +33,7 @@ class RegisterDebtTest extends TestCase{
       ];
 
       $response = $sut->handle($httpRequest);
-      $this->assertEquals($response->getBody(), new MissingParamError("debtTitle"));
+      $this->assertEquals($response->getBody(), new MissingParamError("debtDescription"));
   }
 
   public function testReturnsErrorIfNoValueProvided()
@@ -42,7 +42,7 @@ class RegisterDebtTest extends TestCase{
     $httpRequest = [
       'body' => [
         'debtorId' => 1,
-        'debtTitle' => 'valid_title',
+        'debtDescription' => 'valid_description',
         'endDate' => 'valid_date',
         ] 
       ];
@@ -58,7 +58,7 @@ class RegisterDebtTest extends TestCase{
       'body' => [
         'debtorId' => 1,
         'value' => 'valid_value',
-        'debtTitle' => 'valid_title',
+        'debtDescription' => 'valid_description',
         ] 
       ];
 
@@ -72,7 +72,7 @@ class RegisterDebtTest extends TestCase{
     $httpRequest = [
       'body' => [
         'value' => 'valid_value',
-        'debtTitle' => 'valid_title',
+        'debtDescription' => 'valid_description',
         'endDate' => 'valid_date',
         ] 
       ];
@@ -87,7 +87,7 @@ class RegisterDebtTest extends TestCase{
     $httpRequest = [
       'body' => [
         'debtorId' => 1,
-        'debtTitle' => 'valid_title',
+        'debtDescription' => 'valid_description',
         'value' => 5.55,
         'endDate' => '10/10/2020',
       ]
@@ -97,7 +97,7 @@ class RegisterDebtTest extends TestCase{
     $this->assertEquals($response->getBody(), [
       'id' => 'valid_id',
       'debtorId' => 'valid_id',
-      'debtTitle' => 'valid_title',
+      'debtDescription' => 'valid_description',
       'value' => 5,
       'endDate' => 'valid_date',
     ]);
