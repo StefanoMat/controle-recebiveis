@@ -64,42 +64,43 @@ require BASE.'/views/essentials/head.php';
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-nome" class="col-form-label">Nome:</label>
-            <input type="text" name="nome" class="form-control" id="recipient-nome">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">CPF/CNPJ:</label>
-            <input type="text" name="cpfcnpj" class="form-control cpfcnpj" id="recipient-cpfcnpj">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Data de Nascimento:</label>
-            <input type="text" name="data_nascimento" class="form-control date" id="recipient-nascimento">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Endereço:</label>
-            <input type="text" name="endereco" class="form-control" id="recipient-endereco">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Descrição do título:</label>
-            <textarea name="descricao" class="form-control" id="message-text"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Valor:</label>
-            <input type="text" name="valor" class="form-control money" id="recipient-valor">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Data de Vencimento:</label>
-            <input type="text" name="data_vencimento" class="form-control date" id="recipient-final">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Criar</button>
-      </div>
+      <form action="/" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+          
+            <div class="form-group">
+              <label for="recipient-nome" class="col-form-label">Nome:</label>
+              <input type="text" name="nome" class="form-control" id="recipient-nome">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">CPF/CNPJ:</label>
+              <input type="text" name="cpfcnpj" class="form-control cpfcnpj" id="recipient-cpfcnpj">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Data de Nascimento:</label>
+              <input type="text" name="data_nascimento" class="form-control date" id="recipient-nascimento">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Endereço:</label>
+              <input type="text" name="endereco" class="form-control" id="recipient-endereco">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Descrição do título:</label>
+              <textarea name="descricao" class="form-control" id="message-text"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Valor:</label>
+              <input type="text" name="valor" class="form-control money" id="recipient-valor">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Data de Vencimento:</label>
+              <input type="text" name="data_vencimento" class="form-control date" id="recipient-final">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary">Criar</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

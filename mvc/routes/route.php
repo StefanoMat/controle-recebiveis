@@ -11,6 +11,7 @@ class Route {
   {
     $this->dispatcher = \FastRoute\simpleDispatcher(function(\FastRoute\RouteCollector $r) {
       $r->addRoute('GET', '/', 'index');
+      $r->addRoute('POST', '/', 'create');
     });
   }
 
@@ -37,7 +38,9 @@ class Route {
         $controller = new DashboardController();
         if($routeInfo[1] == 'index') {
           $controller->index();
-        }      
+        } else if($routeInfo[1] == 'create') {
+          $controller->create();
+        }
         break;
     }
   }

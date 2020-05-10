@@ -1,6 +1,6 @@
 
     <footer>
-      <p>Made With Love by Stefano K.</p>
+      <p>Made With ❤️ by Stefano K.</p>
     </footer>
   </body>
 </html>
