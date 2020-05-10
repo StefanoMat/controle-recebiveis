@@ -82,7 +82,7 @@ class registerDebtorTest extends TestCase{
     $httpRequest = [
       'body' => [
         'name' => 'valid_name',
-        'cpfCnpj' => 0,
+        'cpfCnpj' => 'valid_cpf',
         'birthdate' => '10/10/2010',
         'address' => 'valid_address'
       ]
