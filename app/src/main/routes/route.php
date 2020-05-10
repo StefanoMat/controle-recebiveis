@@ -4,6 +4,7 @@ namespace Main\Routes;
 use Main\Factory\Controllers\RegisterDebtorFactory;
 use Main\Factory\Controllers\RegisterDebtFactory;
 use Main\Factory\Controllers\LoadReceivablesFactory;
+use Main\Factory\Controllers\ChangeDebtFactory;
 use Main\Adapter\RouteAdapter;
 
 class Route {
@@ -16,6 +17,7 @@ class Route {
       $r->addRoute('POST', '/debtor', 'post_debtor');
       $r->addRoute('POST', '/debt', 'post_debt');
       $r->addRoute('GET', '/debt', 'get_debt');
+      $r->addRoute('POST', '/put-debt', 'put_debt');
     });
   }
 
@@ -42,13 +44,16 @@ class Route {
       case \FastRoute\Dispatcher::FOUND:
         if($routeInfo[1] == 'post_debtor') {
           $debtorController = new RegisterDebtorFactory();
-          new RouteAdapter($debtorController->create());
+          new RouteAdapter($debtorController->create(), $httpMethod);
         } else if ($routeInfo[1] == 'post_debt') {
           $debtController = new RegisterDebtFactory();
-          new RouteAdapter($debtController->create());
+          new RouteAdapter($debtController->create(), $httpMethod);
         } else if ($routeInfo[1] == 'get_debt') {
           $loadReceivablesController = new LoadReceivablesFactory();
-          new RouteAdapter($loadReceivablesController->create());
+          new RouteAdapter($loadReceivablesController->create(), $httpMethod);
+        } else if ($routeInfo[1] == 'put_debt') {
+          $changeDebtController = new ChangeDebtFactory();
+          new RouteAdapter($changeDebtController->create(), $httpMethod);
         }
         break;
     }

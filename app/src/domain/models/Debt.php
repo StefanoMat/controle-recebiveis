@@ -57,4 +57,9 @@ class Debt{
   {
     return $this->updatedAt;
   }
+
+  public function setId(int $id)
+  {
+    $this->id = $id;
+  }
 }
