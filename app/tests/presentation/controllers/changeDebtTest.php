@@ -100,5 +100,27 @@ class ChangeDebtTest extends TestCase {
       $response = $sut->handle($httpRequest);
       $this->assertEquals($response->getBody(), new MissingParamError("debtorId"));
   }
+  public function testReturnsOkAndRegistersOfRequest()
+  {
+    $sut = new ChangeDebt(new ChangeDebtStub());
 
+    $httpRequest = [
+      'body' => [
+        'id' => 2,
+        'debtorId' => 1,
+        'debtDescription' => 'valid_description',
+        'value' => 5.55,
+        'endDate' => '10/10/2020',
+      ]
+    ];
+    $response = $sut->handle($httpRequest);
+    $this->assertEquals($response->getStatusCode(), 200);
+    $this->assertEquals($response->getBody(), [
+      'id' => 'valid_id',
+      'debtorId' => 'valid_id',
+      'debtDescription' => 'valid_description',
+      'value' => 5,
+      'endDate' => 'valid_date',
+    ]);
+  }
 }
