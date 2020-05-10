@@ -1,7 +1,6 @@
-<?php
-namespace Mvc\Views\Essential;
-?>
 
-</body>
-
+    <footer>
+      <p>Made With Love by Stefano K.</p>
+    </footer>
+  </body>
 </html>
