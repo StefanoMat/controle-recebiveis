@@ -13,7 +13,12 @@ use Presentation\Errors\MissingParamError;
 use Presentation\Helpers\Format;
 
 class ChangeDebtor implements Controller{
+  private $updateDebtorIm;
 
+  public function __construct(UpdateDebtor $updateDebtor)
+  {
+    $this->updateDebtorIm = $updateDebtor;
+  }
   public function handle($httpRequest)
   {
     try{
@@ -28,6 +33,11 @@ class ChangeDebtor implements Controller{
         }
       }
 
+      $debtorFields = $httpRequest['body'];
+      $debtor = $this->__mapDebtor($debtorFields);
+      $register = $this->updateDebtorIm->update($debtor);
+      $response->withStatus(200);
+      $response->withBody($register);
       return $response;
     } catch(\Exception $e) {
       $response->withStatus(500);
