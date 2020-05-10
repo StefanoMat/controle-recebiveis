@@ -19,7 +19,7 @@ class DebtMySqlRepository implements AddDebt{
 
   public function add(Debt $debt)
   {
-    $queryToExecute = $this->db->prepare('insert into debt (debtor_id, debt_description, value, end_date) values (:debtor_id, :debt_description, :value, :end_date)');
+    $queryToExecute = $this->db->prepare('INSERT into debts (debtor_id, debt_description, value, end_date) values (:debtor_id, :debt_description, :value, :end_date)');
     $debtorData = $this->__debtData($debt);
 
     $queryToExecute->bindParam(':debtor_id',$debtorData['debtorId']);

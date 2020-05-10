@@ -19,7 +19,7 @@ class DebtorMySqlRepository implements AddDebtor{
 
   public function add(Debtor $debtor)
   {
-    $queryToExecute = $this->db->prepare('insert into debtors (name, cpf_cnpj, birthdate, address) values (:name, :cpfCnpj, :birthdate, :address)');
+    $queryToExecute = $this->db->prepare('INSERT into debtors (name, cpf_cnpj, birthdate, address) values (:name, :cpfCnpj, :birthdate, :address)');
     $debtorData = $this->__debtorData($debtor);
 
     $queryToExecute->bindParam(':name',$debtorData['name']);
