@@ -14,6 +14,10 @@ section{
   height: 100vh;
 }
 
+.btn-primary {
+  background-color: #ff5318!important;
+  border: #ff5318!important;
+}
 #dashboard h1{
   color: #ffffff;
 }
@@ -49,6 +53,10 @@ section{
 
 #dashboard .list{
   padding: 20px;
+}
+
+#dashboard .list button{
+  margin: 10px 0;
 }
 .list .list-box{
   width: 100%;
