@@ -20,7 +20,7 @@ class ChangeDebtorStub implements UpdateDebtor{
   }
 }
 
-class ChangeDebtororTest extends TestCase {
+class ChangeDebtorTest extends TestCase {
 
   public function testReturnsErrorIfNoIdProvided()
   {
