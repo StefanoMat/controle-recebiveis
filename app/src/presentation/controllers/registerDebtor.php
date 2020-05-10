@@ -49,7 +49,7 @@ class RegisterDebtor implements Controller{
   private function __mapDebtor(array $debtorFields): Debtor
   {
     $birthdateInDate = new DateTime($debtorFields['birthdate']);
-    $debtor = new Debtor($debtorFields['name'], (int) $debtorFields['cpfCnpj'], $birthdateInDate, $debtorFields['address']);
+    $debtor = new Debtor($debtorFields['name'], $debtorFields['cpfCnpj'], $birthdateInDate, $debtorFields['address']);
     return $debtor;
   }
 }

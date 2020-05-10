@@ -15,7 +15,7 @@ class Debtor{
   private $createdAt;
   private $updatedAt;
 
-  public function __construct(string $name, int $cpfCnpj, DateTime $birthdate, string $address)
+  public function __construct(string $name, string $cpfCnpj, DateTime $birthdate, string $address)
   {
     $this->name = $name;
     $this->cpfCnpj = $cpfCnpj;
@@ -33,7 +33,7 @@ class Debtor{
     return $this->name;
   }
 
-  public function getCpfCnpj(): int
+  public function getCpfCnpj(): string
   {
     return $this->cpfCnpj;
   }

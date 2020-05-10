@@ -7,6 +7,7 @@ use DateTime;
 use Domain\Models\Debt;
 use Domain\Usecase\AddDebt;
 use Presentation\Helpers\HttpResponse;
+use Presentation\Helpers\Format;
 use Presentation\Protocols\Controller;
 use Presentation\Errors\MissingParamError;
 use Presentation\Errors\ServerError;
@@ -49,8 +50,11 @@ class RegisterDebt implements Controller {
   private function __mapDebt(array $debtFields) : Debt
   {
     $endDateInDate = new DateTime($debtFields['endDate']);
-    $debt = new Debt((int) $debtFields['debtorId'],$debtFields['debtDescription'], (float) $debtFields['value'], $endDateInDate);
+    $format = new Format();
+    $valueInMoney = $format->decimal($debtFields['value']);
+    $debt = new Debt((int) $debtFields['debtorId'],$debtFields['debtDescription'], (float) $valueInMoney, $endDateInDate);
     return $debt;
   }
+
 
 }
