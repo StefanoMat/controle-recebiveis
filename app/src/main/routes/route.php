@@ -6,7 +6,9 @@ use Main\Factory\Controllers\RegisterDebtFactory;
 use Main\Factory\Controllers\LoadReceivablesFactory;
 use Main\Factory\Controllers\ChangeDebtFactory;
 use Main\Factory\Controllers\ChangeDebtorFactory;
+use Main\Factory\Controllers\RemoveReceivableFactory;
 use Main\Adapter\RouteAdapter;
+use Presentation\Controllers\RemoveReceivable;
 
 class Route {
 
@@ -20,6 +22,7 @@ class Route {
       $r->addRoute('GET', '/debt', 'get_debt');
       $r->addRoute('POST', '/put-debt', 'put_debt');
       $r->addRoute('POST', '/put-debtor', 'put_debtor');
+      $r->addRoute('GET', '/delete-receivable/{debtorId:\d+}/{debtId:\d+}', 'delete_receivable');
     });
   }
 
@@ -59,6 +62,9 @@ class Route {
         } else if ($routeInfo[1] == 'put_debtor') {
           $changeDebtorController = new ChangeDebtorFactory();
           new RouteAdapter($changeDebtorController->create(), $httpMethod);
+        } else if ($routeInfo[1] == 'delete_receivable') {
+          $removeReceivableController = new RemoveReceivableFactory();
+          new RouteAdapter($removeReceivableController->create(), $httpMethod, $routeInfo[2]);
         }
         break;
     }

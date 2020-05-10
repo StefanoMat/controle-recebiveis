@@ -6,6 +6,6 @@ namespace Domain\Usecase;
 
 interface DeleteReceivables{
 
-  public function delete();
+  public function delete(int $debtorId, int $debtId);
   
 }

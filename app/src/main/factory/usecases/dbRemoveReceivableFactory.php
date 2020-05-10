@@ -5,9 +5,8 @@ namespace Main\Factory\UseCases;
 
 use Db\Mysql\ReceivablesMySqlRepository;
 use Domain\Usecase\DeleteReceivables;
-use Domain\Usecase\GetReceivables;
 
-class DbLoadReceivablesFactory{
+class DbRemoveReceivableFactory{
 
   private $receivablesMySqlRepository;
 
@@ -17,14 +16,10 @@ class DbLoadReceivablesFactory{
 
   }
 
-  public function getReceivablesMySqlRepository(): GetReceivables
+  public function getReceivablesMySqlRepository(): DeleteReceivables
   {
     return $this->receivablesMySqlRepository;
-  }
 
-  public function getReceivablesMySqlRepositoryToDelete(): DeleteReceivables
-  {
-    return $this->receivablesMySqlRepository;
   }
 
 }

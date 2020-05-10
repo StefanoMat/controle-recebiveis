@@ -7,11 +7,19 @@ use Presentation\Protocols\Controller;
 class RouteAdapter {
   
 
-  public function __construct(Controller $controller, string $httpMethod = 'GET')
+  public function __construct(Controller $controller, string $httpMethod = 'GET', $vars = null)
   {
+    if ($vars) {
+      $body = $vars;
+    } else if ($httpMethod == 'POST') {
+      $body = $_POST;
+    } else {
+      $body = $_GET;
+    }
     $httpRequest = [
-      'body' => $httpMethod == 'POST' ? $_POST : $_GET
+      'body' => $body
     ];
+
     $response = $controller->handle($httpRequest);
     if ($response->getStatusCode() >= 200 && $response->getStatusCode() <=299) {
       http_response_code($response->getStatusCode());
