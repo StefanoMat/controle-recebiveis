@@ -37,4 +37,68 @@ class ChangeDebtTest extends TestCase {
       $this->assertEquals($response->getBody(), new MissingParamError("id"));
   }
 
+  public function testReturnsErrorIfNodebtDescriptionProvided()
+  {
+    $sut = new ChangeDebt(new ChangeDebtStub());
+    $httpRequest = [
+      'body' => [
+        'id' => '1',
+        'debtorId' => 1,
+        'value' => 'valid_value',
+        'endDate' => 'valid_date',
+        ] 
+      ];
+
+      $response = $sut->handle($httpRequest);
+      $this->assertEquals($response->getBody(), new MissingParamError("debtDescription"));
+  }
+
+  public function testReturnsErrorIfNoValueProvided()
+  {
+    $sut = new ChangeDebt(new ChangeDebtStub());
+    $httpRequest = [
+      'body' => [
+        'id' => '1',
+        'debtorId' => 1,
+        'debtDescription' => 'valid_description',
+        'endDate' => 'valid_date',
+        ] 
+      ];
+
+      $response = $sut->handle($httpRequest);
+      $this->assertEquals($response->getBody(), new MissingParamError("value"));
+  }
+
+  public function testReturnsErrorIfNoEndDateProvided()
+  {
+    $sut = new ChangeDebt(new ChangeDebtStub());
+    $httpRequest = [
+      'body' => [
+        'id' => '1',
+        'debtorId' => 1,
+        'value' => 'valid_value',
+        'debtDescription' => 'valid_description',
+        ] 
+      ];
+
+      $response = $sut->handle($httpRequest);
+      $this->assertEquals($response->getBody(), new MissingParamError("endDate"));
+  }
+
+  public function testReturnsErrorIfNoDebtorIdProvided()
+  {
+    $sut = new ChangeDebt(new ChangeDebtStub());
+    $httpRequest = [
+      'body' => [
+        'id' => 1,
+        'value' => 'valid_value',
+        'debtDescription' => 'valid_description',
+        'endDate' => 'valid_date',
+        ] 
+      ];
+
+      $response = $sut->handle($httpRequest);
+      $this->assertEquals($response->getBody(), new MissingParamError("debtorId"));
+  }
+
 }
