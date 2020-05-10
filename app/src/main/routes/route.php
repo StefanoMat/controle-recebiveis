@@ -5,6 +5,7 @@ use Main\Factory\Controllers\RegisterDebtorFactory;
 use Main\Factory\Controllers\RegisterDebtFactory;
 use Main\Factory\Controllers\LoadReceivablesFactory;
 use Main\Factory\Controllers\ChangeDebtFactory;
+use Main\Factory\Controllers\ChangeDebtorFactory;
 use Main\Adapter\RouteAdapter;
 
 class Route {
@@ -18,6 +19,7 @@ class Route {
       $r->addRoute('POST', '/debt', 'post_debt');
       $r->addRoute('GET', '/debt', 'get_debt');
       $r->addRoute('POST', '/put-debt', 'put_debt');
+      $r->addRoute('POST', '/put-debtor', 'put_debtor');
     });
   }
 
@@ -54,6 +56,9 @@ class Route {
         } else if ($routeInfo[1] == 'put_debt') {
           $changeDebtController = new ChangeDebtFactory();
           new RouteAdapter($changeDebtController->create(), $httpMethod);
+        } else if ($routeInfo[1] == 'put_debtor') {
+          $changeDebtorController = new ChangeDebtorFactory();
+          new RouteAdapter($changeDebtorController->create(), $httpMethod);
         }
         break;
     }

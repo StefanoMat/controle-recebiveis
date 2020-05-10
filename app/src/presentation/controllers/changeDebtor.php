@@ -50,7 +50,7 @@ class ChangeDebtor implements Controller{
   {
     $birthdateInDate = new DateTime($debtorFields['birthdate']);
     $debtor = new Debtor($debtorFields['name'], $debtorFields['cpfCnpj'], $birthdateInDate, $debtorFields['address']);
-    $debtor->setId($debtorFields['id']);
+    $debtor->setId((int) $debtorFields['id']);
     return $debtor;
   }
 }

@@ -6,8 +6,9 @@ namespace Db\Mysql;
 use Domain\Models\Debtor;
 use Domain\Usecase\AddDebtor;
 use Db\Mysql\MysqlHelper;
+use Domain\Usecase\UpdateDebtor;
 
-class DebtorMySqlRepository implements AddDebtor{
+class DebtorMySqlRepository implements AddDebtor, UpdateDebtor{
 
   private $db;
 
@@ -30,8 +31,23 @@ class DebtorMySqlRepository implements AddDebtor{
     return $this->db->lastInsertId();
   }
 
-  private function __debtorData(Debtor $debtor) {
+  public function update(Debtor $debtor)
+  {
+    $queryToExecute = $this->db->prepare('UPDATE debtors SET name= :name,cpf_cnpj= :cpf_cnpj, birthdate= :birthdate, address= :address WHERE id= :id');
+    $debtorData = $this->__debtorData($debtor, true);
+
+    $queryToExecute->bindParam(':id',$debtorData['id']);
+    $queryToExecute->bindParam(':name',$debtorData['name']);
+    $queryToExecute->bindParam(':cpf_cnpj',$debtorData['cpfCnpj']);
+    $queryToExecute->bindParam(':birthdate', $debtorData['birthdate']);
+    $queryToExecute->bindParam(':address', $debtorData['address']);
+    $queryToExecute->execute();
+    return $queryToExecute->rowCount();
+  }
+
+  private function __debtorData(Debtor $debtor, $withId = false) {
     return [
+      'id' => $withId ? $debtor->getId() : 0,
       'name' => $debtor->getName(),
       'cpfCnpj' => $debtor->getCpfCnpj(),
       'birthdate' => $debtor->getBirthdate()->format('Y-m-d'),
