@@ -28,8 +28,26 @@ class RemoveReceivableTest extends TestCase{
   {
     $sut = new RemoveReceivable(new DeleteReceivableStub());
 
-    $httpRequest = [];
+    $httpRequest = [
+      'body' => [
+        'debtId' => 'valid_id'
+      ]
+    ];
     $response = $sut->handle($httpRequest);
     $this->assertEquals($response->getBody(), new MissingParamError("debtorId"));
+  }
+
+  public function testReturnsErrorIfNoDebtIdProvided()
+  {
+    $sut = new RemoveReceivable(new DeleteReceivableStub());
+  
+
+    $httpRequest = [
+      'body' => [
+        'debtorId' => 'valid_id',
+      ]
+    ];
+    $response = $sut->handle($httpRequest);
+    $this->assertEquals($response->getBody(), new MissingParamError("debtId"));
   }
 }
