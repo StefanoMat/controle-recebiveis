@@ -33,7 +33,7 @@ class ReceivablesMySqlRepository implements GetReceivables, DeleteReceivables{
     $result = [
       'debts' => $debts,
       'totals' => $totals,
-      'top_debtors' => $topDebtors
+      'topDebtors' => $topDebtors
     ];
     return $result;
   }

@@ -41,14 +41,15 @@ class RegisterDebtor implements Controller{
       return $response;
     } catch(\Exception $e) {
       $response->withStatus(500);
-      $response->withBody(new ServerError);
+      $response->withBody($e);
       return $response;
     }
   }
 
   private function __mapDebtor(array $debtorFields): Debtor
   {
-    $birthdateInDate = new DateTime($debtorFields['birthdate']);
+    $date = str_replace('&#92;','',$debtorFields['birthdate']);
+    $birthdateInDate = new DateTime($date);
     $debtor = new Debtor($debtorFields['name'], $debtorFields['cpfCnpj'], $birthdateInDate, $debtorFields['address']);
     return $debtor;
   }

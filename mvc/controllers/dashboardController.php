@@ -10,7 +10,14 @@ class DashboardController extends Controller{
 
   public function index()
   {
-    $this->render('index');
+    
+    $client = new Client([
+      'base_uri' => 'http://localhost:3000'
+    ]);
+    $response = $client->request('GET', '/app/debt');
+    $data['data'] = $response->getBody()->getContents();
+
+    $this->render('index', '', (array) $data);
   }
 
   public function create()

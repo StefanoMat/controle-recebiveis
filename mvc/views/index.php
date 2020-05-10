@@ -1,5 +1,8 @@
 <?php
 require BASE.'/views/essentials/head.php';
+$recebiveis = json_decode($data)->debts;
+$totais = json_decode($data)->totals;
+$principais_devedores = json_decode($data)->topDebtors;
 ?>
 
 <section>
@@ -7,53 +10,52 @@ require BASE.'/views/essentials/head.php';
     <div class="col-md-5 info">
       <h1>Consolidação de Maio</h1>
       <h2 class="subtitle">Total de recebíveis registrados</h2>
-      <h2 class="price">R$ 3.000,00</h2>
+      <h2 class="price">R$ <label class="money"><?= isset($totais[0]->total) ? $totais[0]->total : '' ?></label></h2>
 
       <div class="card">
         <ul class="list-group list-group-flush">
+        <li class="list-group-item">Pessoa Jurídica</li>
+          <li class="list-group-item result"><h3>R$ <label class="money"><?= isset($totais[0]->juridica) ? $totais[0]->juridica : '' ?></label></h3></li>
           <li class="list-group-item">Pessoa Física</li>
-          <li class="list-group-item result"><h3>R$ 1000</h3></li>
-          <li class="list-group-item">Pessoa Jurídica</li>
-          <li class="list-group-item result"><h3>R$ 2000</h3></li>
+          <li class="list-group-item result"><h3>R$ <label class="money"><?= isset($totais[0]->fisica) ? $totais[0]->fisica : '' ?></label></h3></li>
         </ul>
       </div>
 
       <h2 class="subtitle">Principais devedores</h2>
-      <h2 class="devedor">Itau Unibanco: R$ 3.000,88</h2>
-      <h2 class="devedor">Caixa Federal: R$ 3.000,88</h2>
-      <h2 class="devedor">Mercado Lanz: R$ 3.000,88</h2>
+      <?php 
+      if (!empty($principais_devedores)):
+        foreach($principais_devedores as $devedor):?>
+      <h2 class="devedor"><?= $devedor->name ?></h2>
+      <h3>R$ <label class="money"><?= $devedor->value ?></label></h3>
+      <?php 
+        endforeach; 
+      endif; ?>
     </div>
 
     <div class="col-md-7 list">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@novo">Novo Recebível</button>
-      <div class="list-box">
-        <div class="line-box">
-          <div class="field col-sm-2"><p>Nome</p>Stefano Kaefer</div>
-          <div class="field col-sm-2"><p>CPF</p>046.173.330-70</div>
-          <div class="field col-sm-2"><p>Valor</p>R$ 1.000,90</div>
-          <div class="field col-sm-4"><p>Descrição</p>Titulo correspondente a venda de as condicionados</div>
-          <div class="field col-sm-1"><p>Vencimento</p>12/08/2020</div>
-        </div>
+     
+    <div class="list-box">
+      <?php 
+      if (!empty($recebiveis)):
+        foreach($recebiveis as $nota):?> 
+          <div class="line-box">
+            <div class="field col-sm-2"><p>Nome</p><?= $nota->name ?? '-'?></div>
+            <div class="field col-sm-2"><p>CPF</p><label class="cpfcnpj"><?= $nota->cpf_cnpj ?? '-' ?></label></div>
+            <div class="field col-sm-2"><p >Valor</p><label class="money"><?= $nota->value ?? '-' ?></label></div>
+            <div class="field col-sm-4"><p>Descrição</p><?= $nota->debt_description  ?? '-'?></div>
+            <div class="field col-sm-1"><p>Vencimento</p><?php
+              $date = new DateTime($nota->end_date); 
+                echo $date->format('d/m/Y');
+              ?>
+            </div>
+          </div>
+        <?php 
+        endforeach;
+      endif; ?>
       </div>
-  
     </div>
   </div>
-  <!-- <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-          One of three columns
-        </div>
-        <div class="col-md-6">
-          One of three columns
-        </div>
-        <div class="col-sm">
-          One of three columns
-        </div>
-      </div>
-    </div>
-  <div class="container">
-   
-  </div> -->
 </section>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -69,31 +71,31 @@ require BASE.'/views/essentials/head.php';
           
             <div class="form-group">
               <label for="recipient-nome" class="col-form-label">Nome:</label>
-              <input type="text" name="nome" class="form-control" id="recipient-nome">
+              <input type="text" name="nome" class="form-control" id="recipient-nome" required>
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">CPF/CNPJ:</label>
-              <input type="text" name="cpfcnpj" class="form-control cpfcnpj" id="recipient-cpfcnpj">
+              <input type="text" name="cpfcnpj" class="form-control cpfcnpj" id="recipient-cpfcnpj" required>
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Data de Nascimento:</label>
-              <input type="text" name="data_nascimento" class="form-control date" id="recipient-nascimento">
+              <input type="text" name="data_nascimento" class="form-control date" id="recipient-nascimento" required>
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Endereço:</label>
-              <input type="text" name="endereco" class="form-control" id="recipient-endereco">
+              <input type="text" name="endereco" class="form-control" id="recipient-endereco" required>
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Descrição do título:</label>
-              <textarea name="descricao" class="form-control" id="message-text"></textarea>
+              <textarea name="descricao" class="form-control" id="message-text" required></textarea>
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Valor:</label>
-              <input type="text" name="valor" class="form-control money" id="recipient-valor">
+              <input type="text" name="valor" class="form-control money" id="recipient-valor" required>
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Data de Vencimento:</label>
-              <input type="text" name="data_vencimento" class="form-control date" id="recipient-final">
+              <input type="text" name="data_vencimento" class="form-control date" id="recipient-final" required>
             </div>
         </div>
         <div class="modal-footer">

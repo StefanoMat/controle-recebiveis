@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Presentation\Controllers;
 
 use DateTime;
+use DateTimeZone;
 use Domain\Models\Debt;
 use Domain\Usecase\AddDebt;
 use Presentation\Helpers\HttpResponse;
@@ -42,14 +43,15 @@ class RegisterDebt implements Controller {
       return $response;
     } catch(\Exception $e) {
       $response->withStatus(500);
-      $response->withBody(new ServerError);
+      $response->withBody(new ServerError());
       return $response;
     }
   }
 
   private function __mapDebt(array $debtFields) : Debt
   {
-    $endDateInDate = new DateTime($debtFields['endDate']);
+    $date = str_replace('&#92;','',$debtFields['endDate']);
+    $endDateInDate = new DateTime($date);
     $format = new Format();
     $valueInMoney = $format->decimal($debtFields['value']);
     $debt = new Debt((int) $debtFields['debtorId'],$debtFields['debtDescription'], (float) $valueInMoney, $endDateInDate);
