@@ -3,6 +3,7 @@ namespace Main\Routes;
 
 use Main\Factory\Controllers\RegisterDebtorFactory;
 use Main\Factory\Controllers\RegisterDebtFactory;
+use Main\Factory\Controllers\LoadReceivablesFactory;
 use Main\Adapter\RouteAdapter;
 
 class Route {
@@ -14,6 +15,7 @@ class Route {
     $this->dispatcher = \FastRoute\simpleDispatcher(function(\FastRoute\RouteCollector $r) {
       $r->addRoute('POST', '/debtor', 'post_debtor');
       $r->addRoute('POST', '/debt', 'post_debt');
+      $r->addRoute('GET', '/debt', 'get_debt');
     });
   }
 
@@ -44,7 +46,10 @@ class Route {
         } else if ($routeInfo[1] == 'post_debt') {
           $debtController = new RegisterDebtFactory();
           new RouteAdapter($debtController->create());
-        }      
+        } else if ($routeInfo[1] == 'get_debt') {
+          $loadReceivablesController = new LoadReceivablesFactory();
+          new RouteAdapter($loadReceivablesController->create());
+        }
         break;
     }
   }
