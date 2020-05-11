@@ -9,7 +9,8 @@
     ],
     "require": {
         "nikic/fast-route": "^1.3",
-        "psr/http-message": "^1.0"
+        "psr/http-message": "^1.0",
+        "vlucas/phpdotenv": "^4.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.1"

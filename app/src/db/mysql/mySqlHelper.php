@@ -11,7 +11,7 @@ class MysqlHelper {
   {
       if (!$this->conn) {
         try {
-          $this->conn = new PDO('mysql:host=localhost:3308;dbname=saas_recebiveis', 'root', '');
+          $this->conn = new PDO('mysql:host='.$_ENV['DB_HOST'].';dbname='.$_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
           $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(\PDOException $e) {
             echo 'ERROR: ' . $e->getMessage();

@@ -12,7 +12,7 @@ class DashboardController extends Controller{
   {
     
     $client = new Client([
-      'base_uri' => 'http://localhost:3000'
+      'base_uri' => $_ENV['API_HOST']
     ]);
     $response = $client->request('GET', '/app/debt');
     $data['data'] = $response->getBody()->getContents();
@@ -27,7 +27,7 @@ class DashboardController extends Controller{
     $data['data_vencimento'] = str_replace("/","-", $data['data_vencimento']);
     $data['data_nascimento'] = str_replace("/","-", $data['data_nascimento']);
     $client = new Client([
-      'base_uri' => 'http://localhost:3000'
+      'base_uri' => $_ENV['API_HOST']
     ]);
     $response = $client->request('POST', '/app/debtor', [
     'form_params' => [
@@ -65,7 +65,7 @@ class DashboardController extends Controller{
     $data['data_vencimento'] = str_replace("/","-", $data['data_vencimento']);
     $data['data_nascimento'] = str_replace("/","-", $data['data_nascimento']);
     $client = new Client([
-      'base_uri' => 'http://localhost:3000'
+      'base_uri' => $_ENV['API_HOST']
     ]);
     $client->request('POST', '/app/put-debt', [
       'form_params' => [
@@ -101,12 +101,16 @@ class DashboardController extends Controller{
   }
   public function delete($ids)
   {
-    print_r($ids);
     $client = new Client([
-      'base_uri' => 'http://localhost:3000'
+      'base_uri' => $_ENV['API_HOST']
     ]);
     $response = $client->request('GET', '/app/delete-receivable/'.$ids['debtorId'].'/'.$ids['debtId']);
 
-    print_r($response->getBody()->getContents());
+    if($response->getStatusCode() <= 299) {
+      header('Location:/');
+    } else {
+      print_r("Não foi possível deletar o recebível");
+      //TODO criar o retorno com flash message na view
+    }
   }
 }
