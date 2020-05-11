@@ -26,7 +26,7 @@ php -S localhost:3030
 ```
 
 ## Primeira tela da aplicação do client
-![Image description](https://drive.google.com/open?id=1XQ8JsuDvoGCK8uBQWRjfppd3qAgZ4dLt)
+![Image description](https://www.dropbox.com/s/o45w46khun39vdy/index.png?dl=0)
 
 ## Testes
 Rode os testes na pasta app/
