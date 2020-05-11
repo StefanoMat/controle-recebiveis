@@ -8,7 +8,6 @@ use Main\Factory\Controllers\ChangeDebtFactory;
 use Main\Factory\Controllers\ChangeDebtorFactory;
 use Main\Factory\Controllers\RemoveReceivableFactory;
 use Main\Adapter\RouteAdapter;
-use Presentation\Controllers\RemoveReceivable;
 
 class Route {
 

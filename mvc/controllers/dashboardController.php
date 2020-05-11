@@ -58,6 +58,47 @@ class DashboardController extends Controller{
    }  
   }
 
+  public function edit() {
+
+    try {
+    $data = $_POST;
+    $data['data_vencimento'] = str_replace("/","-", $data['data_vencimento']);
+    $data['data_nascimento'] = str_replace("/","-", $data['data_nascimento']);
+    $client = new Client([
+      'base_uri' => 'http://localhost:3000'
+    ]);
+    $client->request('POST', '/app/put-debt', [
+      'form_params' => [
+        'id' => $data['debt_id'],
+        'debtorId' => $data['debtor_id'],
+        'debtDescription' => $data['descricao'],
+        'value' => $data['valor'],
+        'endDate' => $data['data_vencimento'],
+        ]
+    ]);
+
+    $response = $client->request('POST', '/app/put-debtor', [
+      'form_params' => [
+        'id' => $data['debtor_id'],
+        'name' => $data['nome'],
+        'cpfCnpj' => preg_replace('/[^0-9]/', '', $data['cpfcnpj']),
+        'birthdate' => $data['data_nascimento'],
+        'address' => $data['endereco']
+        ]
+      ]);
+
+      if($response->getStatusCode() <= 299) {
+        header('Location:/');
+      } else {
+        print_r("Não foi possível atualizar o recebível");
+        //TODO criar o retorno com flash message na view
+      }
+    } catch (\Exception $e) 
+    {
+      print_r($e->getMessage());
+    }
+
+  }
   public function delete($ids)
   {
     print_r($ids);

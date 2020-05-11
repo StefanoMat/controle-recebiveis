@@ -23,4 +23,24 @@ $(document).ready(function () {
     }
     $(this).mask(mask);
   });
+
+  openModalToEdit();
 })
+
+function openModalToEdit() {
+  $('button.editar').on('click', function () {
+    var fields = $(this).siblings();
+    console.log(fields)
+    $('#editModal #debtor_id').val($(fields[1]).val());
+    $('#editModal #debt_id').val($(fields[2]).val());
+    $('#editModal #nascimento').val($(fields[3]).val()).trigger('input');
+    $('#editModal #endereco').val($(fields[4]).val());
+
+    $('#editModal #nome').val($(fields[5]).data('value'));
+    $('#editModal #cpfcnpj').val($(fields[6]).data('value')).trigger('input');
+    $('#editModal #valor').val($(fields[7]).data('value')).trigger('input');
+    $('#editModal #descricao').val($(fields[8]).data('value'));
+    $('#editModal #final').val($(fields[9]).data('value')).trigger('input');
+    $('#editModal').modal();
+  })
+}
