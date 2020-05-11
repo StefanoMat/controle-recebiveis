@@ -33,6 +33,20 @@ section{
   background-color: #ff5318;
 }
 
+.line {
+    height: 24px;
+    font-size: 10px;
+    transform: translateY(-40px);
+    -moz-transform: translateY(-40px);
+    position: absolute;
+
+}
+.field label{
+  margin: 0;
+}
+.line.sec{
+  margin-left: 65px;
+}
 #dashboard .card{
   margin-top: 20px;
 }
@@ -55,22 +69,23 @@ section{
   padding: 20px;
 }
 
-#dashboard .list button{
+#dashboard .list button.novo{
   margin: 10px 0;
 }
 .list .list-box{
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 .list-box .line-box{
   display: flex;
   display: -moz-box;
   display: -ms-flexbox;
-  height: 75px;
+  height: 80px;
   padding: 4px;
   font-size: 15px;
-  margin: 14px 0;
+  margin: 25px 0;
+  align-items: center;
   box-shadow: 0 0px 7px 1px rgba(0,0,0,0.2);
   -webkit-box-shadow: 0 0px 7px 1px rgba(0,0,0,0.2);
   -moz-box-shadow: 0 0px 7px 1px rgba(0,0,0,0.2); 

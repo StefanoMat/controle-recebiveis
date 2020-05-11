@@ -10,14 +10,14 @@ $principais_devedores = json_decode($data)->topDebtors;
     <div class="col-md-5 info">
       <h1>Consolidação de Maio</h1>
       <h2 class="subtitle">Total de recebíveis registrados</h2>
-      <h2 class="price">R$ <label class="money"><?= isset($totais[0]->total) ? $totais[0]->total : '' ?></label></h2>
+      <h2 class="price">R$ <label class="money"><?= isset($totais[0]->total) ? $totais[0]->total : '-' ?></label></h2>
 
       <div class="card">
         <ul class="list-group list-group-flush">
         <li class="list-group-item">Pessoa Jurídica</li>
-          <li class="list-group-item result"><h3>R$ <label class="money"><?= isset($totais[0]->juridica) ? $totais[0]->juridica : '' ?></label></h3></li>
+          <li class="list-group-item result"><h3>R$ <label class="money"><?= isset($totais[0]->juridica) ? $totais[0]->juridica : '-' ?></label></h3></li>
           <li class="list-group-item">Pessoa Física</li>
-          <li class="list-group-item result"><h3>R$ <label class="money"><?= isset($totais[0]->fisica) ? $totais[0]->fisica : '' ?></label></h3></li>
+          <li class="list-group-item result"><h3>R$ <label class="money"><?= isset($totais[0]->fisica) ? $totais[0]->fisica : '-' ?></label></h3></li>
         </ul>
       </div>
 
@@ -33,21 +33,27 @@ $principais_devedores = json_decode($data)->topDebtors;
     </div>
 
     <div class="col-md-7 list">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@novo">Novo Recebível</button>
+    <button type="button" class="btn btn-primary novo" data-toggle="modal" data-target="#exampleModal" data-whatever="@novo">Novo Recebível</button>
      
     <div class="list-box">
       <?php 
       if (!empty($recebiveis)):
-        foreach($recebiveis as $nota):?> 
+        foreach($recebiveis as $nota):
+        ?> 
+        
           <div class="line-box">
+          <button type="button" class="btn btn-info btn-sm line">EDITAR</button>
+          <a href="/delete/<?=$nota->debtor_id?>/<?=$nota->debt_id?>" class="btn btn-danger btn-sm line sec">APAGAR</a>
+          
             <div class="field col-sm-2"><p>Nome</p><?= $nota->name ?? '-'?></div>
-            <div class="field col-sm-2"><p>CPF</p><label class="cpfcnpj"><?= $nota->cpf_cnpj ?? '-' ?></label></div>
-            <div class="field col-sm-2"><p >Valor</p><label class="money"><?= $nota->value ?? '-' ?></label></div>
-            <div class="field col-sm-4"><p>Descrição</p><?= $nota->debt_description  ?? '-'?></div>
+            <div class="field col-sm-3"><p>Documento</p><label class="cpfcnpj-l"><?= $nota->cpf_cnpj ?? '-' ?></label></div>
+            <div class="field col-sm-2"><p >Valor</p>R$ <label class="money"><?= $nota->value ?? '-' ?></label></div>
+            <div class="field col-sm-3"><p>Descrição</p><?= $nota->debt_description  ?? '-'?></div>
             <div class="field col-sm-1"><p>Vencimento</p><?php
+
               $date = new DateTime($nota->end_date); 
                 echo $date->format('d/m/Y');
-              ?>
+              ?> 
             </div>
           </div>
         <?php 
