@@ -11,12 +11,13 @@ cd app && composer install
 ## Váriaveis de ambiente 
 configure o arquivo .ENV do root para apontar o host back-end (default: localhost:3000) e .ENV da pasta app/ para dados de acesso do banco de dados
 
-## Inicie o servidor do back-end
+## Inicie o servidor
+###  Para o back-end
 porta default para a aplicação backend:
 ```
 php -S localhost:3000
 ```
-### Inicide o servidor do client
+### Para o client
 ```
 php -S localhost:3030
 ```
