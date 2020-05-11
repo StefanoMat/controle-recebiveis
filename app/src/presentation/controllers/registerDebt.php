@@ -43,7 +43,7 @@ class RegisterDebt implements Controller {
       return $response;
     } catch(\Exception $e) {
       $response->withStatus(500);
-      $response->withBody(new ServerError());
+      $response->withBody($e);
       return $response;
     }
   }

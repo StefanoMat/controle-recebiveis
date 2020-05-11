@@ -19,7 +19,7 @@ class ReceivablesMySqlRepository implements GetReceivables, DeleteReceivables{
 
   public function get()
   {
-    $queryToExecute = $this->db->prepare('SELECT * FROM debts inner join debtors on debtor_id = debtors.id');
+    $queryToExecute = $this->db->prepare('SELECT *, debts.id debt_id FROM debts inner join debtors on debtor_id = debtors.id');
 
     $queryToExecute->execute();
     $debts = $queryToExecute->fetchAll(\PDO::FETCH_ASSOC);

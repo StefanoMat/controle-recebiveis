@@ -24,7 +24,8 @@ class DashboardController extends Controller{
   {
    try {
     $data = $_POST;
-
+    $data['data_vencimento'] = str_replace("/","-", $data['data_vencimento']);
+    $data['data_nascimento'] = str_replace("/","-", $data['data_nascimento']);
     $client = new Client([
       'base_uri' => 'http://localhost:3000'
     ]);
@@ -55,5 +56,16 @@ class DashboardController extends Controller{
    } catch (\Exception $e) {
      print_r($e->getMessage());
    }  
+  }
+
+  public function delete($ids)
+  {
+    print_r($ids);
+    $client = new Client([
+      'base_uri' => 'http://localhost:3000'
+    ]);
+    $response = $client->request('GET', '/app/delete-receivable/'.$ids['debtorId'].'/'.$ids['debtId']);
+
+    print_r($response->getBody()->getContents());
   }
 }

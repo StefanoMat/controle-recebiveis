@@ -12,6 +12,7 @@ class Route {
     $this->dispatcher = \FastRoute\simpleDispatcher(function(\FastRoute\RouteCollector $r) {
       $r->addRoute('GET', '/', 'index');
       $r->addRoute('POST', '/', 'create');
+      $r->addRoute('GET', '/delete/{debtorId:\d+}/{debtId:\d+}', 'delete');
     });
   }
 
@@ -40,6 +41,8 @@ class Route {
           $controller->index();
         } else if($routeInfo[1] == 'create') {
           $controller->create();
+        } else if($routeInfo[1] == 'delete') {
+          $controller->delete($routeInfo[2]);
         }
         break;
     }
