@@ -11,6 +11,9 @@ cd app && composer install
 ## Váriaveis de ambiente 
 configure o arquivo .ENV do root para apontar o host back-end (default: localhost:3000) e .ENV da pasta app/ para dados de acesso do banco de dados
 
+## Crie o banco de dados
+Crie o banco de dados a partir do arquivo base.sql no root
+
 ## Inicie o servidor
 ###  Para o back-end
 porta default para a aplicação backend:
