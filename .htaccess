@@ -1,2 +1,6 @@
 RewriteEngine on
+
+RRewriteRule ^(app/*)$ app/index.php
 RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php
+RewriteCond %{REQUEST_URI} !/public/ [NC]
+RewriteRule ^(.*?)/?$ public/$1 [L]

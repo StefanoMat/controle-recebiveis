@@ -1,10 +1,11 @@
 <?php
 
 define('ROOT', dirname(__FILE__));
-DEFINE('BASE', ROOT.'/mvc');
+define('BASE', '/app');
+
 require ROOT.'/vendor/autoload.php';
 
-use Mvc\Routes\Route;
+use Main\Routes\Route;
 use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createImmutable(__DIR__);
